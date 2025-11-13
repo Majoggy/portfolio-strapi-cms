@@ -466,6 +466,37 @@ export interface ApiEmploymentEmployment extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiLeftPanelLeftPanel extends Struct.SingleTypeSchema {
+  collectionName: 'left_panels';
+  info: {
+    displayName: 'LeftPanel';
+    pluralName: 'left-panels';
+    singularName: 'left-panel';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    about: Schema.Attribute.RichText;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    jobTitle: Schema.Attribute.String & Schema.Attribute.Required;
+    link: Schema.Attribute.Component<'menu-link.menu-link', true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::left-panel.left-panel'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProjectProject extends Struct.CollectionTypeSchema {
   collectionName: 'projects';
   info: {
@@ -1042,6 +1073,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::employment.employment': ApiEmploymentEmployment;
+      'api::left-panel.left-panel': ApiLeftPanelLeftPanel;
       'api::project.project': ApiProjectProject;
       'api::technology.technology': ApiTechnologyTechnology;
       'plugin::content-releases.release': PluginContentReleasesRelease;
