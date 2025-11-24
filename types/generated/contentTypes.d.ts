@@ -466,12 +466,12 @@ export interface ApiEmploymentEmployment extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiLeftPanelLeftPanel extends Struct.SingleTypeSchema {
-  collectionName: 'left_panels';
+export interface ApiPortfolioPortfolio extends Struct.SingleTypeSchema {
+  collectionName: 'portfolios';
   info: {
-    displayName: 'LeftPanel';
-    pluralName: 'left-panels';
-    singularName: 'left-panel';
+    displayName: 'Portfolio';
+    pluralName: 'portfolios';
+    singularName: 'portfolio';
   };
   options: {
     draftAndPublish: true;
@@ -481,15 +481,17 @@ export interface ApiLeftPanelLeftPanel extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    employment: Schema.Attribute.Component<'employment.employment', false>;
     jobTitle: Schema.Attribute.String & Schema.Attribute.Required;
     link: Schema.Attribute.Component<'menu-link.menu-link', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::left-panel.left-panel'
+      'api::portfolio.portfolio'
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String & Schema.Attribute.Required;
+    project: Schema.Attribute.Component<'project.project', true>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -1073,7 +1075,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::employment.employment': ApiEmploymentEmployment;
-      'api::left-panel.left-panel': ApiLeftPanelLeftPanel;
+      'api::portfolio.portfolio': ApiPortfolioPortfolio;
       'api::project.project': ApiProjectProject;
       'api::technology.technology': ApiTechnologyTechnology;
       'plugin::content-releases.release': PluginContentReleasesRelease;

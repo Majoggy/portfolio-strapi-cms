@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_project_projects",
+  "info": {
+    "displayName": "project"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "liveLink": {
+      "type": "string"
+    },
+    "githubLink": {
+      "type": "string"
+    },
+    "order": {
+      "type": "integer"
+    },
+    "technologies": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::technology.technology"
+    }
+  },
+  "config": {}
+}
