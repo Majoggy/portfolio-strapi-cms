@@ -1,10 +1,10 @@
 {
   "kind": "singleType",
-  "collectionName": "left_panels",
+  "collectionName": "portfolios",
   "info": {
-    "singularName": "left-panel",
-    "pluralName": "left-panels",
-    "displayName": "LeftPanel"
+    "singularName": "portfolio",
+    "pluralName": "portfolios",
+    "displayName": "Portfolio"
   },
   "options": {
     "draftAndPublish": true
@@ -26,6 +26,16 @@
       "type": "component",
       "component": "menu-link.menu-link",
       "repeatable": true
+    },
+    "project": {
+      "type": "component",
+      "component": "project.project",
+      "repeatable": true
+    },
+    "employment": {
+      "type": "component",
+      "component": "employment.employment",
+      "repeatable": false
     }
   }
 }
