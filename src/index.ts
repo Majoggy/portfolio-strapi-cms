@@ -1,4 +1,5 @@
-// import type { Core } from '@strapi/strapi';
+import type { Core } from '@strapi/strapi';
+import { seedTechnologies, seedPortfolio } from './seeds/seed-functions';
 
 export default {
   /**
@@ -16,5 +17,20 @@ export default {
    * This gives you an opportunity to set up your data model,
    * run jobs, or perform some special logic.
    */
-  bootstrap(/* { strapi }: { strapi: Core.Strapi } */) {},
+  async bootstrap({ strapi }: { strapi: Core.Strapi }) {
+    try {
+      const existingPortfolio = await strapi.documents('api::portfolio.portfolio').findFirst();
+
+      if (existingPortfolio) {
+        return strapi.log.info('Portfolio data already exists, skipping seed.');
+      }
+
+      strapi.log.info('Seeding data...');
+
+      const technologies = await seedTechnologies(strapi);
+      await seedPortfolio(strapi, technologies);
+    } catch (error) {
+      strapi.log.error('Error seeding data:', error);
+    }
+  },
 };
