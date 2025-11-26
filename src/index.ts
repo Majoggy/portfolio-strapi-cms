@@ -27,8 +27,8 @@ export default {
 
       strapi.log.info('Seeding data...');
 
-      const technologies = await seedTechnologies(strapi);
-      await seedPortfolio(strapi, technologies);
+      await seedTechnologies(strapi);
+      await seedPortfolio(strapi);
     } catch (error) {
       strapi.log.error('Error seeding data:', error);
     }

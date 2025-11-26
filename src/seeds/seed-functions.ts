@@ -2,8 +2,6 @@ import type { Core } from '@strapi/strapi';
 import { technologyData, projectData, employmentData } from './index';
 
 export async function seedTechnologies(strapi: Core.Strapi) {
-  const technologies = [];
-
   for (const name of technologyData) {
     const existingTech = await strapi.documents('api::technology.technology').findMany({
       filters: { name },
@@ -11,24 +9,25 @@ export async function seedTechnologies(strapi: Core.Strapi) {
     });
 
     if (existingTech.length === 0) {
-      const tech = await strapi.documents('api::technology.technology').create({
+      await strapi.documents('api::technology.technology').create({
         data: {
           name,
         },
         status: 'published',
       });
-      technologies.push(tech);
+      
       strapi.log.info(`Created technology: ${name}`);
     } else {
-      technologies.push(existingTech[0]);
       strapi.log.info(`Technology already exists: ${name}`);
     }
   }
-
-  return technologies;
 }
 
-export async function seedPortfolio(strapi: Core.Strapi, technologies: any[]) {
+export async function seedPortfolio(strapi: Core.Strapi) {
+  const technologies = await strapi.documents('api::technology.technology').findMany({
+    status: 'published',
+  });
+
   const getTechIds = (names: string[]) =>
     technologies.filter(t => names.includes(t.name)).map(t => t.documentId);
 
