@@ -1,5 +1,5 @@
 import type { Core } from '@strapi/strapi';
-import { technologyData, projectData, employmentData } from './index';
+import { technologyData, projectData, employmentData, portfolioData } from './index';
 
 export async function seedTechnologies(strapi: Core.Strapi) {
   for (const name of technologyData) {
@@ -33,41 +33,13 @@ export async function seedPortfolio(strapi: Core.Strapi) {
 
   await strapi.documents('api::portfolio.portfolio').create({
     data: {
-      name: 'Your Name',
-      jobTitle: 'Full Stack Developer',
-      about: "I’m a software engineer who enjoys building things people actually use. Most of my time is spent using React, TypeScript, and Node — creating everything from marketing sites and customer-facing tools to internal platforms that make everyday work a little easier.",
-      link: [
-        {
-          __component: 'menu-link.menu-link',
-          label: 'Projects',
-          href: '#projects',
-          isExternal: false,
-        },
-        {
-          __component: 'menu-link.menu-link',
-          label: 'Employment',
-          href: '#employment',
-          isExternal: false,
-        },
-        {
-          __component: 'menu-link.menu-link',
-          label: 'GitHub',
-          href: 'https://www.github.com/majoggy',
-          isExternal: true,
-        },
-        {
-          __component: 'menu-link.menu-link',
-          label: 'LinkedIn',
-          href: 'https://www.linkedin.com/in/cpr-baker/',
-          isExternal: true,
-        },
-        {
-          __component: 'menu-link.menu-link',
-          label: 'Email',
-          href: 'mailto:cbaker87gmail.com',
-          isExternal: true,
-        },
-      ],
+      name: portfolioData.name,
+      jobTitle: portfolioData.jobTitle,
+      about: portfolioData.about,
+      link: portfolioData.links.map((link) => ({
+        __component: 'menu-link.menu-link',
+        ...link,
+      })),
       project: projectData.map((project) => ({
         __component: 'project.project',
         ...project,
