@@ -1,10 +1,23 @@
 export const technologyData = [
   'React',
+  'Next.js',
   'TypeScript',
+  'JavaScript',
   'Node.js',
+  'Express',
   'Strapi',
   'GraphQL',
   'PostgreSQL',
+  'MongoDB',
+  'Cypress',
+  'Detox',
+  'Jest',
+  'Mocha',
   'Docker',
   'AWS',
+  'HTML5',
+  'CSS3',
+  'Python',
+  'Django',
+  'Hapi'
 ];
